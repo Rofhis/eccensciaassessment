@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Eccenscia Assessment</string>
+    <string name="hint_enter_your_first_name">Enter your first name</string>
+    <string name="hint_enter_your_surname">Enter your surname</string>
+    <string name="text_button_1">Button 1</string>
+    <string name="text_button_2">Button 2</string>
+    <string name="text_button_3">Button 3</string>
+    <string name="error_please_enter_valid_value">Please enter valid value</string>
 </resources>

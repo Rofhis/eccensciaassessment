@@ -1,18 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:fillViewport="true">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="@dimen/dimen_24dp"
+        tools:context=".MainActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/firstNameEditText"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_56dp"
+            android:hint="@string/hint_enter_your_first_name"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/surnameEditText"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_56dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:hint="@string/hint_enter_your_surname"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firstNameEditText" />
+
+        <TextView
+            android:id="@+id/outputOneTextView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_48dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:background="@drawable/textview_background"
+            android:gravity="center_vertical|start"
+            android:paddingHorizontal="@dimen/dimen_4dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/surnameEditText"
+            tools:text="Rofhiwa"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/outputTwoTextView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_48dp"
+            android:layout_marginTop="@dimen/font_size_18sp"
+            android:background="@drawable/textview_background"
+            android:gravity="center_vertical|start"
+            android:paddingHorizontal="@dimen/dimen_4dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_16sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/outputOneTextView"
+            tools:text="Binary"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/outputThreeTextView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_48dp"
+            android:layout_marginTop="@dimen/font_size_18sp"
+            android:background="@drawable/textview_background"
+            android:gravity="center_vertical|start"
+            android:paddingHorizontal="@dimen/dimen_4dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_16sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/outputTwoTextView"
+            tools:text="Binary hexadecimal"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/sha256OutputTextView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_48dp"
+            android:layout_marginTop="@dimen/font_size_18sp"
+            android:background="@drawable/textview_background"
+            android:gravity="center_vertical|start"
+            android:paddingHorizontal="@dimen/dimen_4dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_16sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/outputThreeTextView"
+            tools:text="SHA256"
+            tools:visibility="visible" />
+
+        <View
+            android:id="@+id/dividerView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_2dp"
+            android:layout_marginTop="@dimen/dimen_12dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sha256OutputTextView" />
+
+        <Button
+            android:id="@+id/buttonOne"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_56dp"
+            android:layout_marginTop="@dimen/dimen_12dp"
+            android:text="@string/text_button_1"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dividerView" />
+
+        <Button
+            android:id="@+id/buttonTwo"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_56dp"
+            android:layout_marginTop="@dimen/dimen_4dp"
+            android:text="@string/text_button_2"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonOne" />
+
+        <Button
+            android:id="@+id/buttonThree"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_56dp"
+            android:layout_marginTop="@dimen/dimen_4dp"
+            android:text="@string/text_button_3"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonTwo" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
