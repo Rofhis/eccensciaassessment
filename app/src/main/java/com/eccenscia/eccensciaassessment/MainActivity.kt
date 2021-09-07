@@ -3,6 +3,7 @@ package com.eccenscia.eccensciaassessment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -28,24 +29,36 @@ class MainActivity : AppCompatActivity() {
             outputThreeTextView.addVisibilityStateWatcher()
             sha256OutputTextView.addVisibilityStateWatcher()
 
+            setSupportActionBar(toolbar)
+
             buttonOne.setOnClickListener {
                 if (firstNameEditText.validate() && surnameEditText.validate()) {
                     val firstNameAndSurnameOddLetters = "${firstNameEditText.getValue().toOddLetters()} ${surnameEditText.getValue().toEvenLetters()}"
                     sha256OutputTextView.text = firstNameAndSurnameOddLetters.toSHA256()
                     outputOneTextView.text = firstNameAndSurnameOddLetters
+                    Log.i(javaClass.simpleName, "Odd/Even Letters: $firstNameAndSurnameOddLetters")
+                    Log.i(javaClass.simpleName, "Odd/Even Letters SHA256: ${firstNameAndSurnameOddLetters.toSHA256()}")
                 }
             }
 
             buttonTwo.setOnClickListener {
-                val binary = outputOneTextView.getValue().toBinary()
-                sha256OutputTextView.text = binary.toSHA256()
-                outputTwoTextView.text = binary
+                if (outputOneTextView.getValue().isNotEmpty()) {
+                    val binaryString = outputOneTextView.getValue().toBinary()
+                    sha256OutputTextView.text = binaryString.toSHA256()
+                    outputTwoTextView.text = binaryString
+                    Log.i(javaClass.simpleName, "Binary String: $binaryString")
+                    Log.i(javaClass.simpleName, "Binary SHA256: ${binaryString.toSHA256()}")
+                }
             }
 
             buttonThree.setOnClickListener {
-                val hexString = outputOneTextView.getValue().toHexString()
-                sha256OutputTextView.text = hexString.toSHA256()
-                outputThreeTextView.text = hexString
+                if (outputOneTextView.getValue().isNotEmpty()) {
+                    val hexString = outputOneTextView.getValue().toHexadecimal()
+                    sha256OutputTextView.text = hexString.toSHA256()
+                    outputThreeTextView.text = hexString
+                    Log.i(javaClass.simpleName, "Hexadecimal String: $hexString")
+                    Log.i(javaClass.simpleName, "Hexadecimal SHA256: ${hexString.toSHA256()}")
+                }
             }
         }
     }
@@ -71,53 +84,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun String.toEvenLetters(): String {
-        val thisString = this
-        return StringBuilder().apply {
-            thisString.split("").forEachIndexed { index, s ->
-                if (index % 2 == 0) {
-                    append(s)
-                }
-            }
-        }.toString()
-    }
+    private fun String.toEvenLetters(): String = split("").filterIndexed { index, _ -> index % 2 == 0 }.joinToString("")
 
-    private fun String.toOddLetters(): String {
-        val thisString = this
-        return StringBuilder().apply {
-            thisString.split("").forEachIndexed { index, s ->
-                if (index % 2 != 0) {
-                    append(s)
-                }
-            }
-        }.toString()
-    }
+    private fun String.toOddLetters(): String = split("").filterIndexed { index, _ -> index % 2 != 0 }.joinToString("")
 
-    private fun String.toHexString(): String {
-        val md5 = MessageDigest.getInstance("md5")
-        md5.update(this.toByteArray())
-        return md5.digest().joinToString(separator = "") { eachByte -> "%02x".format(eachByte) }
-    }
-
-    private fun TextView.getValue(): String {
-        return this.text.toString().trim()
-    }
-
-    private fun String.toBinary(): String {
+    private fun String.toHexadecimal(): String {
         val result = StringBuilder()
-        val chars: CharArray = this.toCharArray()
+        val chars = this.toCharArray()
         for (char in chars) {
-            result.append(
-                String.format("%8s", Integer.toBinaryString(char.code)).replace(" ".toRegex(), "0") // zero pads
-            )
+            result.append(Integer.toHexString(char.code))
         }
         return result.toString()
     }
 
-    private fun String.toSHA256(): String {
-        return MessageDigest
-            .getInstance("SHA-256")
-            .digest(this.toByteArray())
-            .fold("", { str, it -> str + "%02x".format(it) })
+    private fun TextView.getValue(): String = this.text.toString()
+
+    private fun String.toBinary(): String {
+        val result = StringBuilder()
+        val chars = this.toCharArray()
+        for (char in chars) {
+            result.append(String.format("%8s", Integer.toBinaryString(char.code)))
+        }
+        return result.toString()
     }
+
+    private fun String.toSHA256(): String = MessageDigest
+        .getInstance("SHA-256")
+        .digest(this.toByteArray())
+        .fold("", { str, it -> str + "%02x".format(it) })
 }

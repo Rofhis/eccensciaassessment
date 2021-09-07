@@ -10,13 +10,26 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dimen_24dp"
         tools:context=".MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:background="@color/black"
+            app:titleTextColor="@color/white"
+            app:title="@string/app_name"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/firstNameEditText"
+            style="@style/Widget.AppCompat.EditText"
             android:layout_width="0dp"
             android:layout_height="@dimen/dimen_56dp"
+            android:layout_margin="@dimen/dimen_24dp"
+            android:backgroundTint="@color/black"
             android:hint="@string/hint_enter_your_first_name"
             android:importantForAutofill="no"
             android:inputType="text"
@@ -24,13 +37,16 @@
             android:textColorHint="@color/grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <EditText
             android:id="@+id/surnameEditText"
+            style="@style/Widget.AppCompat.EditText"
             android:layout_width="0dp"
             android:layout_height="@dimen/dimen_56dp"
+            android:layout_marginHorizontal="@dimen/dimen_24dp"
             android:layout_marginTop="@dimen/dimen_8dp"
+            android:backgroundTint="@color/black"
             android:hint="@string/hint_enter_your_surname"
             android:importantForAutofill="no"
             android:inputType="text"
@@ -43,11 +59,12 @@
         <TextView
             android:id="@+id/outputOneTextView"
             android:layout_width="0dp"
-            android:layout_height="@dimen/dimen_48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_24dp"
             android:layout_marginTop="@dimen/dimen_16dp"
             android:background="@drawable/textview_background"
             android:gravity="center_vertical|start"
-            android:paddingHorizontal="@dimen/dimen_4dp"
+            android:padding="@dimen/dimen_8dp"
             android:textColor="@color/black"
             android:textSize="@dimen/font_size_18sp"
             android:textStyle="bold"
@@ -61,11 +78,12 @@
         <TextView
             android:id="@+id/outputTwoTextView"
             android:layout_width="0dp"
-            android:layout_height="@dimen/dimen_48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_24dp"
             android:layout_marginTop="@dimen/font_size_18sp"
             android:background="@drawable/textview_background"
             android:gravity="center_vertical|start"
-            android:paddingHorizontal="@dimen/dimen_4dp"
+            android:padding="@dimen/dimen_8dp"
             android:textColor="@color/black"
             android:textSize="@dimen/font_size_16sp"
             android:textStyle="bold"
@@ -79,11 +97,12 @@
         <TextView
             android:id="@+id/outputThreeTextView"
             android:layout_width="0dp"
-            android:layout_height="@dimen/dimen_48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_24dp"
             android:layout_marginTop="@dimen/font_size_18sp"
             android:background="@drawable/textview_background"
             android:gravity="center_vertical|start"
-            android:paddingHorizontal="@dimen/dimen_4dp"
+            android:padding="@dimen/dimen_8dp"
             android:textColor="@color/black"
             android:textSize="@dimen/font_size_16sp"
             android:textStyle="bold"
@@ -97,11 +116,12 @@
         <TextView
             android:id="@+id/sha256OutputTextView"
             android:layout_width="0dp"
-            android:layout_height="@dimen/dimen_48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_24dp"
             android:layout_marginTop="@dimen/font_size_18sp"
             android:background="@drawable/textview_background"
             android:gravity="center_vertical|start"
-            android:paddingHorizontal="@dimen/dimen_4dp"
+            android:padding="@dimen/dimen_8dp"
             android:textColor="@color/black"
             android:textSize="@dimen/font_size_16sp"
             android:textStyle="bold"
@@ -112,31 +132,23 @@
             tools:text="SHA256"
             tools:visibility="visible" />
 
-        <View
-            android:id="@+id/dividerView"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dimen_2dp"
-            android:layout_marginTop="@dimen/dimen_12dp"
-            android:background="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sha256OutputTextView" />
-
         <Button
             android:id="@+id/buttonOne"
             android:layout_width="0dp"
             android:layout_height="@dimen/dimen_56dp"
+            android:layout_marginHorizontal="@dimen/dimen_24dp"
             android:layout_marginTop="@dimen/dimen_12dp"
             android:text="@string/text_button_1"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dividerView" />
+            app:layout_constraintTop_toBottomOf="@+id/sha256OutputTextView" />
 
         <Button
             android:id="@+id/buttonTwo"
             android:layout_width="0dp"
             android:layout_height="@dimen/dimen_56dp"
+            android:layout_marginHorizontal="@dimen/dimen_24dp"
             android:layout_marginTop="@dimen/dimen_4dp"
             android:text="@string/text_button_2"
             android:textColor="@color/white"
@@ -148,6 +160,7 @@
             android:id="@+id/buttonThree"
             android:layout_width="0dp"
             android:layout_height="@dimen/dimen_56dp"
+            android:layout_marginHorizontal="@dimen/dimen_24dp"
             android:layout_marginTop="@dimen/dimen_4dp"
             android:text="@string/text_button_3"
             android:textColor="@color/white"
